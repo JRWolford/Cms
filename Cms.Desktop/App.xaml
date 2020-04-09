@@ -1,7 +1,7 @@
 ﻿<prism:PrismApplication x:Class="Cms.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Cms"
+             xmlns:local="clr-namespace:Cms.Desktop"
              xmlns:prism="http://prismlibrary.com/" >
     <Application.Resources>
          
