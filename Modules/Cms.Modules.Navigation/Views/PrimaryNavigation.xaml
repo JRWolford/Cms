@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="Cms.Modules.Navigation.Views.PrimaryNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"    
+             xmlns:interop="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="{DynamicResource GrayBrush1}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Cms.Modules.Navigation;component/Utils/NavigationControlsDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel>
+
+        <!--Menu Blade-->
+        <StackPanel Style="{DynamicResource NavigationBladePanel}">
+
+            <!--Binding for Click Event-->
+            <interop:Interaction.Triggers>
+                <interop:EventTrigger EventName="MouseLeftButtonDown">
+                    <interop:InvokeCommandAction Command="{Binding OpenMenuCommand}"/>
+                </interop:EventTrigger>
+            </interop:Interaction.Triggers>
+
+            <!--Icon-->
+            <Label Style="{DynamicResource NavigationIconLabel}" Content="{x:Static iconPacks:PackIconMaterialKind.Menu}"/>
+
+        </StackPanel>
+
+        <!--My Tasks Blade-->
+        <StackPanel Style="{DynamicResource NavigationBladePanel}" ToolTip="{Binding MyTasksNavigationItem.ToolTip}">
+
+            <!--Binding for Click Event-->
+            <interop:Interaction.Triggers>
+                <interop:EventTrigger EventName="MouseLeftButtonDown">
+                    <interop:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding MyTasksNavigationItem}"/>
+                </interop:EventTrigger>
+            </interop:Interaction.Triggers>
+
+            <!--Icon-->
+            <Label Content="{x:Static iconPacks:PackIconMaterialKind.Account}">
+                <Label.Style>
+                    <Style TargetType="Label" BasedOn="{StaticResource NavigationIconLabel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MyTasksNavigationItem.IsDestinationActive}" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding MyTasksNavigationItem.IsDestinationActive}" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+
+            <!--Content-->
+            <Label Content="{Binding MyTasksNavigationItem.Name}">
+                <Label.Style>
+                    <Style TargetType="Label" BasedOn="{StaticResource NavigationNameLabel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MyTasksNavigationItem.IsDestinationActive}" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+
+        </StackPanel>
+
+        <!--Assigned Plans Blades-->
+        <ItemsControl ItemsSource="{Binding NavigationItems}">
+
+            <!--Items Panel Tempalte-->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <!--Item Template-->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Style="{DynamicResource NavigationBladePanel}" ToolTip="{Binding ToolTip}">
+
+                        <!--Binding for Click Event-->
+                        <interop:Interaction.Triggers>
+                            <interop:EventTrigger EventName="MouseLeftButtonDown">
+                                <interop:InvokeCommandAction Command="{Binding Path=DataContext.PlanNavigationCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding }"/>
+                            </interop:EventTrigger>
+                        </interop:Interaction.Triggers>
+
+                        <!--Plan Icon-->
+                        <Label Content="{Binding Initials}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13">
+                            <Label.Style>
+                                <Style TargetType="Label" BasedOn="{StaticResource PlanIconLabel}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsDestinationActive}" Value="True">
+                                            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                        <!--<DataTrigger Binding="{Binding IsDestinationActive}" Value="False">
+                                            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
+                                        </DataTrigger>-->
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+
+                        <!--Plan Name-->
+                        <Label Content="{Binding Name}">
+                            <Label.Style>
+                                <Style TargetType="Label" BasedOn="{StaticResource NavigationNameLabel}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsDestinationActive}" Value="True">
+                                            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+
+    </StackPanel>
+
+</UserControl>

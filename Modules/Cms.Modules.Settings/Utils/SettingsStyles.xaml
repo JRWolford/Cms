@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--#region Button Styles-->
+
+    <!--Restore Defaults Button-->
+    <Style x:Key="RestoreDefaultsButton" TargetType="Button" BasedOn="{StaticResource MetroButton}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="125"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+        <Setter Property="Content" Value="Restore Defaults"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="mah:ButtonHelper.CornerRadius" Value="0"/>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region Label Styles-->
+
+    <!--Base Settings Label-->
+    <Style x:Key="BaseSettingsLabel" TargetType="Label" BasedOn="{StaticResource MetroLabel}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="SegoeUi"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <!--Settings Content Header Label-->
+    <Style x:Key="SettingsContentHeaderLabel" TargetType="Label" BasedOn="{StaticResource BaseSettingsLabel}">
+        <Setter Property="FontSize" Value="40"/>
+    </Style>
+
+    <!--Settings Attribute Label-->
+    <Style x:Key="SettingsAttributeLabel" TargetType="Label" BasedOn="{StaticResource BaseSettingsLabel}">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region ToggleSwitch Styles-->
+
+    <!--Base ToggleSwitch-->
+    <Style x:Key="BaseToggleSwitch" TargetType="mah:ToggleSwitch" BasedOn="{StaticResource MetroToggleSwitch}">
+        <Setter Property="Margin" Value="0,-20,0,0"/>
+        <Setter Property="OnLabel" Value="Enabled"/>
+        <Setter Property="OffLabel" Value="Disabled"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Height="0" Margin="0"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+
+</ResourceDictionary>

@@ -1,9 +1,23 @@
-﻿<prism:PrismApplication x:Class="Cms.App"
+﻿<prism:PrismApplication x:Class="Cms.Desktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Cms.Desktop"
-             xmlns:prism="http://prismlibrary.com/" >
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:Cms.Desktop">
+
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+
+
+                <!--Themes and Styles-->
+                <ResourceDictionary Source="pack://application:,,,/Cms.Core.Wpf;component/ResourceDictionaries/Orange.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Cms.Core.Wpf;component/ResourceDictionaries/CustomLight.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+
 </prism:PrismApplication>

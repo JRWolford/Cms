@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="Cms.Modules.Settings.Views.DisplaySettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <!--Resources-->
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Cms.Modules.Settings;component/utils/SettingsStyles.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Margin="20,0,0,0">
+
+        <!--Row Definitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+
+        <!--Header Grid-->
+        <Grid Grid.Row="0">
+
+            <!--Column Definitions-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Header-->
+            <Label Grid.Column="0" Style="{DynamicResource SettingsContentHeaderLabel}" Content="Display Settings" />
+
+            <!--Restore Defaults-->
+            <Button Grid.Column="1" Style="{DynamicResource RestoreDefaultsButton}" Command="{Binding RestoreDefaultsCommand}"/>
+
+        </Grid>
+
+        <!--Settings-->
+        <Grid Grid.Row="1" Margin="5">
+
+            <!--Column Definitions-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Row Definitions-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Dark Mode-->
+            <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource SettingsAttributeLabel}" Content="Dark Mode"/>
+            <mah:ToggleSwitch Grid.Row="0" Grid.Column="1" Style="{DynamicResource BaseToggleSwitch}" IsChecked="{Binding IsDarkThemeEnabled}"/>
+
+            <!--Accent Color-->
+            <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource SettingsAttributeLabel}" Content="Accent Color"/>
+            <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AccentOptions}" VerticalAlignment="Top">
+
+                <!--ItemsControl Panel-->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!--ItemsControl Item-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Height="50" Width="50" Margin="2" ToolTip="{Binding Name}"
+                                Cursor="Hand" Command="{Binding Path=DataContext.SelectAccentCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" 
+                                CommandParameter="{Binding}"
+                                BorderBrush="White"
+                                Opacity="1">
+
+                            <!--Style-->
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding IsAvailable}" Value="False">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding IsAvailable}" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="{Binding Color}"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderThickness" Value="2"/>
+                                            <Setter Property="Background" Value="White"/>
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="Red"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>
